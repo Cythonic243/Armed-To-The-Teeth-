@@ -19,38 +19,38 @@
 ## git-lfs ##
 
 #Image
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.psd filter=lfs diff=lfs merge=lfs -text
-*.ai filter=lfs diff=lfs merge=lfs -text
+*.jpg -text binary
+*.jpeg -text binary
+*.png -text binary
+*.gif -text binary
+*.psd -text binary
+*.ai -text binary
 
 #Audio
-*.mp3 filter=lfs diff=lfs merge=lfs -text
-*.wav filter=lfs diff=lfs merge=lfs -text
-*.ogg filter=lfs diff=lfs merge=lfs -text
+*.mp3 -text binary
+*.wav -text binary
+*.ogg -text binary
 
 #Video
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.mov filter=lfs diff=lfs merge=lfs -text
+*.mp4 -text binary
+*.mov -text binary
 
 #3D Object
-*.FBX filter=lfs diff=lfs merge=lfs -text
-*.fbx filter=lfs diff=lfs merge=lfs -text
-*.blend filter=lfs diff=lfs merge=lfs -text
-*.obj filter=lfs diff=lfs merge=lfs -text
+*.FBX -text binary
+*.fbx -text binary
+*.blend -text binary
+*.obj -text binary
 
 #ETC
-*.a filter=lfs diff=lfs merge=lfs -text
-*.exr filter=lfs diff=lfs merge=lfs -text
-*.tga filter=lfs diff=lfs merge=lfs -text
-*.pdf filter=lfs diff=lfs merge=lfs -text
-*.zip filter=lfs diff=lfs merge=lfs -text
-*.dll filter=lfs diff=lfs merge=lfs -text
-*.unitypackage filter=lfs diff=lfs merge=lfs -text
-*.aif filter=lfs diff=lfs merge=lfs -text
-*.ttf filter=lfs diff=lfs merge=lfs -text
-*.rns filter=lfs diff=lfs merge=lfs -text
-*.reason filter=lfs diff=lfs merge=lfs -text
-*.lxo filter=lfs diff=lfs merge=lfs -text
+*.a -text binary
+*.exr -text binary
+*.tga -text binary
+*.pdf -text binary
+*.zip -text binary
+*.dll -text binary
+*.unitypackage -text binary
+*.aif -text binary
+*.ttf -text binary
+*.rns -text binary
+*.reason -text binary
+*.lxo -text binary
