@@ -18,6 +18,7 @@ public class RubyController : MonoBehaviour
     // ======== AUDIO ==========
     public AudioClip hitSound;
     public AudioClip shootingSound;
+    public AudioClip attackSound;
     
     // ======== HEALTH ==========
     public int health
@@ -90,9 +91,14 @@ public class RubyController : MonoBehaviour
 
         // ============== PROJECTILE ======================
 
-        if (Input.GetKeyDown(KeyCode.C))
-            LaunchProjectile();
         
+
+        if (Input.GetMouseButtonDown(0))
+            MeleeAttack();
+
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.C))
+            LaunchProjectile();
+
         // ======== DIALOGUE ==========
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -155,12 +161,19 @@ public class RubyController : MonoBehaviour
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
 
         Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.Launch(lookDirection, 300);
+        Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        projectDirection.Normalize();
+        projectile.Launch(projectDirection, 300);
         
         animator.SetTrigger("Launch");
         audioSource.PlayOneShot(shootingSound);
     }
     
+    void MeleeAttack()
+    {
+        animator.SetTrigger("Launch");
+        audioSource.PlayOneShot(attackSound);
+    }
     // =============== SOUND ==========================
 
     //Allow to play a sound on the player sound source. used by Collectible

@@ -22,10 +22,10 @@ public class CSVReader : MonoBehaviour
     public void Start()
     {
         keyValuePairs = SplitCsvGrid(csvFile.text);
-        foreach(var p in keyValuePairs)
-        {
-            Debug.Log(p.Key + "->" + p.Value);
-        }
+        //foreach(var p in keyValuePairs)
+        //{
+        //    Debug.Log(p.Key + "->" + p.Value);
+        //}
     }
 
     // splits a CSV file into a 2D string array
