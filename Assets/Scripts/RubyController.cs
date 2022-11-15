@@ -5,7 +5,10 @@ public class RubyController : MonoBehaviour
 {
     // ========= MOVEMENT =================
     public float speed = 4;
-    
+    public float sprintSpeed = 5;
+    public float sprintSec = 0.1f;
+    float sprintTimer = 0;
+
     // ======== HEALTH ==========
     public int maxHealth = 5;
     public float timeInvincible = 2.0f;
@@ -38,6 +41,7 @@ public class RubyController : MonoBehaviour
     // ==== ANIMATION =====
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
+    bool isSprint = false;
     
     // ================= SOUNDS =======================
     AudioSource audioSource;
@@ -73,7 +77,23 @@ public class RubyController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
                 
         Vector2 move = new Vector2(horizontal, vertical);
-        
+
+        if (isSprint)
+        {
+            sprintTimer -= Time.deltaTime;
+            if (sprintTimer < 0)
+            {
+                isSprint = false;
+            }
+        }
+
+        if (isSprint)
+        {
+            move = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            move.Normalize();
+            move = new Vector2(lookDirection.x, lookDirection.y);
+        }
+
         if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
             lookDirection.Set(move.x, move.y);
@@ -81,7 +101,6 @@ public class RubyController : MonoBehaviour
         }
 
         currentInput = move;
-
 
         // ============== ANIMATION =======================
 
@@ -98,6 +117,9 @@ public class RubyController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.C))
             LaunchProjectile();
+
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space))
+            Sprint();
 
         // ======== DIALOGUE ==========
         if (Input.GetKeyDown(KeyCode.X))
@@ -118,9 +140,15 @@ public class RubyController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
-        
-        position = position + currentInput * speed * Time.deltaTime;
-        
+        if (!isSprint)
+        {
+            position = position + currentInput * speed * Time.deltaTime;
+        }
+        else
+        {
+            position = position + currentInput * sprintSpeed * Time.deltaTime;
+        }
+
         rigidbody2d.MovePosition(position);
     }
 
@@ -174,6 +202,14 @@ public class RubyController : MonoBehaviour
         animator.SetTrigger("Launch");
         audioSource.PlayOneShot(attackSound);
     }
+
+    void Sprint()
+    {
+        if (isSprint) return;
+        isSprint = true;
+        sprintTimer = sprintSec;
+    }
+
     // =============== SOUND ==========================
 
     //Allow to play a sound on the player sound source. used by Collectible

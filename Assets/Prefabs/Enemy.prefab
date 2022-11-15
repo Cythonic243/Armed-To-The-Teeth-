@@ -424,8 +424,8 @@ MonoBehaviour:
   title: Sequence
   rect:
     serializedVersion: 2
-    x: 240
-    y: 260
+    x: 243
+    y: 200
     width: 160
     height: 45
   parent: {fileID: 7132029997475052407}
@@ -490,8 +490,8 @@ MonoBehaviour:
   title: Move Towards
   rect:
     serializedVersion: 2
-    x: 80
-    y: 340
+    x: 20
+    y: 280
     width: 160
     height: 45
   parent: {fileID: 3884934095313207119}
@@ -570,8 +570,8 @@ MonoBehaviour:
   title: Move Towards
   rect:
     serializedVersion: 2
-    x: 320
-    y: 339
+    x: 220
+    y: 280
     width: 160
     height: 45
   parent: {fileID: 3884934095313207119}
@@ -693,8 +693,8 @@ MonoBehaviour:
   title: Move To GameObject
   rect:
     serializedVersion: 2
-    x: 540
-    y: 335
+    x: 400
+    y: 280
     width: 160
     height: 45
   parent: {fileID: 3884934095313207119}
