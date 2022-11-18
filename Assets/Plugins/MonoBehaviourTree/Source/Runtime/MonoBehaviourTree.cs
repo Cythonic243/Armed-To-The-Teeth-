@@ -24,7 +24,7 @@ namespace MBT
         /// </summary>
         public event UnityAction onTick = delegate {};
         private Root rootNode;
-        private List<Node> executionStack;
+        private List<Node> executionNodes;
         private List<Node> executionLog;
         private List<Decorator> interruptingNodes = new List<Decorator>();
         
@@ -41,10 +41,10 @@ namespace MBT
             if(masterTree == this)
             {
                 // Create lists with capicity
-                executionStack = new List<Node>(8);
+                executionNodes = new List<Node>(8);
                 executionLog = new List<Node>(nodes.Length);
                 // Set start node when tree is created first time
-                executionStack.Add(rootNode);
+                executionNodes.Add(rootNode);
                 executionLog.Add(rootNode);
             }
             // Initialize nodes of tree/subtree
@@ -73,12 +73,12 @@ namespace MBT
             }
 
             // Revert stack
-            executionStack.Clear();
-            executionStack.AddRange(abortingNode.GetStoredTreeSnapshot());
+            executionNodes.Clear();
+            executionNodes.AddRange(abortingNode.GetStoredTreeSnapshot());
             // Restore flow of events in nodes after abort
-            for (int i = 0; i < executionStack.Count; i++)
+            for (int i = 0; i < executionNodes.Count; i++)
             {
-                Node node = executionStack[i];
+                Node node = executionNodes[i];
                 if (node.status == Status.Running)
                 {
                     // This node is still running and might need to restore the state
@@ -120,9 +120,11 @@ namespace MBT
 
             // Max number of traversed nodes
             int executionLimit = maxExecutionsPerTick;
+            List<Node> children = new List<Node>();
             // Traverse tree
-            while (executionStack.Count > 0)
+            for (int i = 0; i< executionNodes.Count;)
             {
+                Node currentNode = executionNodes[i];
                 if (executionLimit == 0) {
                     _TickMarker.End();
                     return;
@@ -130,34 +132,56 @@ namespace MBT
                 executionLimit -= 1;
 
                 // Execute last element in stack
-                Node currentNode = executionStack[executionStack.Count - 1];
                 NodeResult nodeResult = currentNode.Execute();
                 // Set new status
                 currentNode.status = nodeResult.status;
+                children.Clear();
                 if (nodeResult.status == Status.Running) {
                     // If node is running, then stop execution or continue children
-                    Node child = nodeResult.child;
-                    if (child == null) {
-                        // Stop execution and continue next tick
-                        _TickMarker.End();
-                        return;
-                    } else {
-                        // Add child to execution stack and execute it in next loop
-                        executionStack.Add(child);
-                        executionLog.Add(child);
-                        // IMPORTANT: Priority must be > 0 and assigned in this order
-                        child.runtimePriority = executionLog.Count;
-                        child.OnAllowInterrupt();
-                        child.OnEnter();
-                        #if UNITY_EDITOR
-                        // Stop execution if breakpoint is set on this node
-                        if (child.breakpoint)
+                    if (currentNode is Parallel)
+                    {
+                        children.AddRange(currentNode.children);
+                    }
+                    else if (nodeResult.child != null)
+                    {
+                        children.Add(nodeResult.child);
+                    }
+                    
+                    if (children.Count == 0) {
+                        if (i == executionNodes.Count - 1)
                         {
-                            Debug.Break();
-                            UnityEditor.Selection.activeGameObject = this.gameObject;
-                            Debug.Log("MBT Breakpoint: " + child.title, this);
+                            // Stop execution and continue next tick
                             _TickMarker.End();
                             return;
+                        }
+                        i++;
+                    } else {
+                        // remove current
+                        executionNodes.RemoveAt(i);
+                        for (int j = 0; j < children.Count; j++)
+                        {
+                            var child = children[j];
+                            if (child.status != Status.Running && child.status != Status.Ready)
+                            {
+                                continue;
+                            }
+                            // Add child to execution stack and execute it in next loop
+                            executionNodes.Insert(i+j, child);
+                            executionLog.Add(child);
+                            // IMPORTANT: Priority must be > 0 and assigned in this order
+                            child.runtimePriority = executionLog.Count;
+                            child.OnAllowInterrupt();
+                            child.OnEnter();
+#if UNITY_EDITOR
+                            // Stop execution if breakpoint is set on this node
+                            if (child.breakpoint)
+                            {
+                                Debug.Break();
+                                UnityEditor.Selection.activeGameObject = this.gameObject;
+                                Debug.Log("MBT Breakpoint: " + child.title, this);
+                                _TickMarker.End();
+                                return;
+                            }
                         }
                         #endif
                         continue;
@@ -165,7 +189,11 @@ namespace MBT
                 } else {
                     // Remove last node from stack and move up (closer to root)
                     currentNode.OnExit();
-                    executionStack.RemoveAt(executionStack.Count - 1);
+                    executionNodes.RemoveAt(i);
+                    if (currentNode.parent != null && currentNode.parent.status == Status.Running)
+                    {
+                        executionNodes.Insert(i,currentNode.parent);
+                    }
                 }
             }
             
@@ -227,7 +255,7 @@ namespace MBT
                 node.status = Status.Ready;
             }
             executionLog.Clear();
-            executionStack.Clear();
+            executionNodes.Clear();
         }
 
         /// <summary>
@@ -236,28 +264,28 @@ namespace MBT
         public void Restart()
         {
             ResetNodes();
-            executionStack.Add(rootNode);
+            executionNodes.Add(rootNode);
             executionLog.Add(rootNode);
         }
 
         internal void GetStack(ref Node[] stack)
         {
             // Resize array when size is too small
-            if (executionStack.Count > stack.Length)
+            if (executionNodes.Count > stack.Length)
             {
                 // Node should not change priority and position during runtime
                 // It means the array will be resized once during first call of this method
-                Array.Resize<Node>(ref stack, executionStack.Count);
+                Array.Resize<Node>(ref stack, executionNodes.Count);
             }
 #if UNITY_EDITOR
             // Additional sanity check in case nodes are reordered or changed in editor
-            if (stack.Length > executionStack.Count)
+            if (stack.Length > executionNodes.Count)
             {
                 Debug.LogError("Changing order of MBT nodes during runtime might cause errors or unpredictable results.");
             }
 #endif
             // Copy elements to provided array
-            executionStack.CopyTo(stack);
+            executionNodes.CopyTo(stack);
         }
 
         public Node GetRoot()
