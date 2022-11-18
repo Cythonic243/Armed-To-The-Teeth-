@@ -118,7 +118,7 @@ public class RubyController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.C))
             LaunchProjectile();
 
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
             Sprint();
 
         // ======== DIALOGUE ==========

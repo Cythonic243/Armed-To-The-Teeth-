@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 	
 	// ================= SOUNDS =======================
 	AudioSource audioSource;
-	
+    MBT.Blackboard blackboard;
 	void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D>();
@@ -40,7 +40,9 @@ public class Enemy : MonoBehaviour
 		animator = GetComponent<Animator>();
 
 		audioSource = GetComponent<AudioSource>();
-	}
+
+        blackboard = GetComponent<MBT.Blackboard>();
+    }
 	
 	void Update()
 	{
@@ -90,5 +92,8 @@ public class Enemy : MonoBehaviour
 		audioSource.Stop();
 		audioSource.PlayOneShot(hitSound);
 		audioSource.PlayOneShot(fixedSound);
-	}
+
+        blackboard.GetVariable<MBT.BoolVariable>("IsDead").Value = true;
+
+    }
 }
