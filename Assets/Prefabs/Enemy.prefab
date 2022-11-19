@@ -117,15 +117,13 @@ GameObject:
   - component: {fileID: 1805207542951022310}
   - component: {fileID: 607500089}
   - component: {fileID: 8432030144034250523}
-  - component: {fileID: 3585679995870365439}
-  - component: {fileID: 8795279939363739181}
   m_Layer: 30
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6982084178593964875
 Transform:
   m_ObjectHideFlags: 0
@@ -409,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 3585679995870365439}
+  selectedEditorNode: {fileID: 0}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -428,11 +426,11 @@ MonoBehaviour:
   title: Sequence
   rect:
     serializedVersion: 2
-    x: 328
-    y: 203
+    x: 240
+    y: 140
     width: 160
     height: 45
-  parent: {fileID: 3585679995870365439}
+  parent: {fileID: 7132029997475052407}
   children:
   - {fileID: 1805207542951022310}
   - {fileID: 1873055288}
@@ -462,7 +460,7 @@ MonoBehaviour:
     height: 45
   parent: {fileID: 0}
   children:
-  - {fileID: 3585679995870365439}
+  - {fileID: 3884934095313207119}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -621,8 +619,8 @@ MonoBehaviour:
   title: Move To GameObject
   rect:
     serializedVersion: 2
-    x: 360
-    y: 300
+    x: 320
+    y: 240
     width: 160
     height: 45
   parent: {fileID: 3884934095313207119}
@@ -687,8 +685,8 @@ MonoBehaviour:
   title: Set Player Transform
   rect:
     serializedVersion: 2
-    x: 180
-    y: 300
+    x: 120
+    y: 240
     width: 160
     height: 45
   parent: {fileID: 3884934095313207119}
@@ -717,8 +715,8 @@ MonoBehaviour:
   title: Wait
   rect:
     serializedVersion: 2
-    x: 560
-    y: 300
+    x: 500
+    y: 240
     width: 160
     height: 45
   parent: {fileID: 3884934095313207119}
@@ -748,78 +746,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: IsDead
   val: 0
---- !u!114 &3585679995870365439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6982084178593964873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08540605df275034fafc8e05c6704214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Selector
-  rect:
-    serializedVersion: 2
-    x: 240
-    y: 140
-    width: 160
-    height: 45
-  parent: {fileID: 7132029997475052407}
-  children:
-  - {fileID: 8795279939363739181}
-  - {fileID: 3884934095313207119}
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  random: 0
---- !u!114 &8795279939363739181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6982084178593964873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Is Set Condition
-  rect:
-    serializedVersion: 2
-    x: 40
-    y: 200
-    width: 160
-    height: 45
-  parent: {fileID: 3585679995870365439}
-  children: []
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  abort: 0
-  invert: 0
-  type: 0
-  boolReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 2275238424012011518}
-    key: IsDead
-    constantValue: 0
-  objectReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
-  transformReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
 --- !u!1 &7972057267707664465
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,8 +28,12 @@ public class Enemy : MonoBehaviour
 	
 	// ================= SOUNDS =======================
 	AudioSource audioSource;
+
     MBT.Blackboard blackboard;
-	void Start ()
+    MBT.MBTExecutor mBTExecutor;
+    MBT.MonoBehaviourTree behaviourTree;
+    Pathfinding.AILerp aILerp;
+    void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D>();
 
@@ -42,6 +46,12 @@ public class Enemy : MonoBehaviour
 		audioSource = GetComponent<AudioSource>();
 
         blackboard = GetComponent<MBT.Blackboard>();
+
+        mBTExecutor = GetComponent<MBT.MBTExecutor>();
+
+        behaviourTree = GetComponent<MBT.MonoBehaviourTree>();
+
+        aILerp = GetComponent<Pathfinding.AILerp>();
     }
 	
 	void Update()
@@ -94,6 +104,8 @@ public class Enemy : MonoBehaviour
 		audioSource.PlayOneShot(fixedSound);
 
         blackboard.GetVariable<MBT.BoolVariable>("IsDead").Value = true;
-
+        mBTExecutor.enabled = false;
+        behaviourTree.enabled = false;
+        aILerp.enabled = false;
     }
 }

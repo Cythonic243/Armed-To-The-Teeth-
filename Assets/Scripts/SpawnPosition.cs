@@ -27,7 +27,7 @@ public class SpawnPosition : MonoBehaviour
             return;
         }
 
-        if (spawnCount > maxNum)
+        if (spawnCount >= maxNum)
         {
             return;
         }
@@ -36,6 +36,7 @@ public class SpawnPosition : MonoBehaviour
         {
             GameObject o = GameObject.Instantiate(spawnObject);
             o.transform.position = transform.position;
+            o.SetActive(true);
             spawnTimer = intervalSec;
             spawnCount++;
         }
