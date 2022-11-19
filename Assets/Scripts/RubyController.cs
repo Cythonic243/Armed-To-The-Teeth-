@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RubyController : MonoBehaviour
@@ -45,7 +46,8 @@ public class RubyController : MonoBehaviour
     
     // ================= SOUNDS =======================
     AudioSource audioSource;
-    
+
+    Dictionary<string,bool> axisInUse = new Dictionary<string, bool>();
     void Start()
     {
         // =========== MOVEMENT ==============
@@ -109,20 +111,17 @@ public class RubyController : MonoBehaviour
         animator.SetFloat("Speed", move.magnitude);
 
         // ============== PROJECTILE ======================
-
-        
-
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || GetAxisRawDown("Fire1"))
             MeleeAttack();
 
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.C))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.C) || GetAxisRawDown("Fire2"))
             LaunchProjectile();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || GetAxisRawDown("Jump"))
             Sprint();
 
         // ======== DIALOGUE ==========
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X)|| GetAxisRawDown("Fire3"))
         {
             RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, 1 << LayerMask.NameToLayer("NPC"));
             if (hit.collider != null)
@@ -208,6 +207,30 @@ public class RubyController : MonoBehaviour
         if (isSprint) return;
         isSprint = true;
         sprintTimer = sprintSec;
+    }
+
+    bool GetAxisRawDown(string axisName)
+    {
+        if (!axisInUse.ContainsKey(axisName))
+        {
+            axisInUse.Add(axisName, false);
+        }
+
+        if (Input.GetAxisRaw(axisName) != 0)
+        {
+            if (axisInUse[axisName] == false)
+            {
+                axisInUse[axisName] = true;
+                return true;
+            }
+
+            return false;
+        }
+        else
+        {
+            axisInUse[axisName] = false;
+            return false;
+        }
     }
 
     // =============== SOUND ==========================
