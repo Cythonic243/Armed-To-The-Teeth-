@@ -13,6 +13,8 @@ namespace ATTT
         public TransformReference transformToMove;
         public float speed = 0.1f;
         public float minDistance = 0f;
+        public float timeToMove = 0.2f;
+        float moveTimer = 0;
         Animator animator;
         Pathfinding.AIDestinationSetter aIDestinationSetter;
         Pathfinding.AILerp aILerp;
@@ -22,6 +24,7 @@ namespace ATTT
             animator = transform.gameObject.GetComponent<Animator>();
             aIDestinationSetter = transform.gameObject.GetComponent<Pathfinding.AIDestinationSetter>();
             aILerp = transform.gameObject.GetComponent<Pathfinding.AILerp>();
+            moveTimer = 0;
         }
         public override NodeResult Execute()
         {
@@ -29,8 +32,9 @@ namespace ATTT
             Transform obj = transformToMove.Value;
             // Move as long as distance is greater than min. distance
             float dist = Vector3.Distance(target, obj.position);
-            if (dist > minDistance)
+            if (dist > minDistance && moveTimer < timeToMove)
             {
+                moveTimer += Time.deltaTime;
                 aIDestinationSetter.enabled = true;
                 aILerp.enabled = true;
                 aIDestinationSetter.target = goalTransform.Value;
