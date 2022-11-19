@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -85,7 +86,14 @@ public class Enemy : MonoBehaviour
 		
 		if(controller != null)
 			controller.ChangeHealth(-1);
-	}
+
+        //Tooth tooth = other.collider.GetComponent<Tooth>();
+        //if (tooth != null)
+        //{
+        //    tooth.ChangeHealth(-20);
+        //}
+
+    }
 
 	public void Fix()
 	{
@@ -107,5 +115,14 @@ public class Enemy : MonoBehaviour
         mBTExecutor.enabled = false;
         behaviourTree.enabled = false;
         aILerp.enabled = false;
+
+        StartCoroutine(WaitAndDestory());
     }
+    
+    private IEnumerator WaitAndDestory()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
+    }
+
 }

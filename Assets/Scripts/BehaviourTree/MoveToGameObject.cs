@@ -11,7 +11,6 @@ namespace ATTT
     {
         public TransformReference goalTransform;
         public TransformReference transformToMove;
-        public float speed = 0.1f;
         public float minDistance = 0f;
         public float timeToMove = 0.2f;
         float moveTimer = 0;
@@ -38,19 +37,6 @@ namespace ATTT
                 aIDestinationSetter.enabled = true;
                 aILerp.enabled = true;
                 aIDestinationSetter.target = goalTransform.Value;
-                // Move towards target
-                //obj.position = Vector3.MoveTowards(
-                //    obj.position, 
-                //    target, 
-                //    (speed > dist)? dist : speed 
-                //);
-                //Vector3 direction = target - obj.position;
-                //direction.Normalize();
-                //if (animator != null)
-                //{
-                //    animator.SetFloat("ForwardX", direction.x);
-                //    animator.SetFloat("ForwardY", direction.y);
-                //}
                 return NodeResult.running;
             }
             else

@@ -117,8 +117,13 @@ public class RubyController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.C) || GetAxisRawDown("Fire2"))
             LaunchProjectile();
 
+        if (Input.GetKeyDown(KeyCode.E) || GetAxisRawDown("Fire3"))
+            Repair();
+
         if (Input.GetKeyDown(KeyCode.Space) || GetAxisRawDown("Jump"))
             Sprint();
+
+        
 
         // ======== DIALOGUE ==========
         if (Input.GetKeyDown(KeyCode.X)|| GetAxisRawDown("Fire3"))
@@ -196,6 +201,12 @@ public class RubyController : MonoBehaviour
         audioSource.PlayOneShot(shootingSound);
     }
     
+    void Repair()
+    {
+        animator.SetTrigger("Launch");
+        audioSource.PlayOneShot(attackSound);
+    }
+
     void MeleeAttack()
     {
         animator.SetTrigger("Launch");
