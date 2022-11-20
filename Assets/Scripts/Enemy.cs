@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     MBT.MBTExecutor mBTExecutor;
     MBT.MonoBehaviourTree behaviourTree;
     Pathfinding.AILerp aILerp;
+    
     void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D>();
@@ -53,6 +54,9 @@ public class Enemy : MonoBehaviour
         behaviourTree = GetComponent<MBT.MonoBehaviourTree>();
 
         aILerp = GetComponent<Pathfinding.AILerp>();
+
+        if (LevelManager.instance!=null && !LevelManager.instance.enemies.Contains(this))
+            LevelManager.instance.enemies.Add(this);
     }
 	
 	void Update()
@@ -123,6 +127,12 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (LevelManager.instance != null && LevelManager.instance.enemies.Contains(this))
+            LevelManager.instance.enemies.Remove(this);
     }
 
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// Handle the projectile launched by the player to fix the robots.
 /// </summary>
-public class Projectile : MonoBehaviour
+public class Projectile : AttackBase
 {
     Rigidbody2D rigidbody2d;
     
@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     }
 
     //called by the player controller after it instantiate a new projectile to launch it.
-    public void Launch(Vector2 direction, float force)
+    public override void Launch(Vector2 direction, float force)
     {
         rigidbody2d.AddForce(direction * force);
     }

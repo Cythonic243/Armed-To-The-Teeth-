@@ -51,13 +51,34 @@ public class Tooth : MonoBehaviour
             case State.INFECTED:
                 spriteRenderer.sprite = sprInfected;
                 spawnPosition.enabled = true;
+                if (LevelManager.instance != null && !LevelManager.instance.infectTeeth.Contains(this))
+                    LevelManager.instance.infectTeeth.Add(this);
                 break;
             case State.VULNERABLE:
                 spriteRenderer.sprite = sprVulnerable;
                 spawnPosition.enabled = false;
+                if (LevelManager.instance != null && !LevelManager.instance.vulnerableTeeth.Contains(this))
+                    LevelManager.instance.vulnerableTeeth.Add(this);
                 break;
         }
         state = s;
+    }
+
+    void ExitState(State s)
+    {
+        switch (s)
+        {
+            case State.OVERHEAL:
+                break;
+            case State.INFECTED:
+                if (LevelManager.instance != null && LevelManager.instance.infectTeeth.Contains(this))
+                    LevelManager.instance.infectTeeth.Remove(this);
+                break;
+            case State.VULNERABLE:
+                if (LevelManager.instance != null && LevelManager.instance.vulnerableTeeth.Contains(this))
+                    LevelManager.instance.vulnerableTeeth.Remove(this);
+                break;
+        }
     }
 
     public void ChangeHealth(int n)
@@ -69,14 +90,17 @@ public class Tooth : MonoBehaviour
         if (n < 0 && healthBefore > 0 && health <= 0)
         {
             health = -50;
+            ExitState(state);
             EnterState(State.INFECTED);
         }
         if (n > 0 && healthBefore < 0 && health >= 0)
         {
+            ExitState(state);
             EnterState(State.VULNERABLE);
         }
         if (n > 0 && healthBefore < 150 && health == 150)
         {
+            ExitState(state);
             EnterState(State.OVERHEAL);
         }
     }

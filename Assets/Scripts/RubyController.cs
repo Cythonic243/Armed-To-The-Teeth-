@@ -192,7 +192,7 @@ public class RubyController : MonoBehaviour
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
 
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        AttackBase projectile = projectileObject.GetComponent<AttackBase>();
         Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         projectDirection.Normalize();
         projectile.Launch(projectDirection, 300);
