@@ -8,8 +8,9 @@ public class RubyController : MonoBehaviour
     public float speed = 4;
     public float sprintSpeed = 5;
     public float sprintSec = 0.1f;
+    public float slowDownSec = 1;
     float sprintTimer = 0;
-
+    float slowDownTimer = 0;
     // ======== HEALTH ==========
     public int maxHealth = 5;
     public float timeInvincible = 2.0f;
@@ -79,6 +80,10 @@ public class RubyController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
                 
         Vector2 move = new Vector2(horizontal, vertical);
+        if (move.magnitude > 0)
+        {
+            move.Normalize();
+        }
 
         if (isSprint)
         {
@@ -102,7 +107,20 @@ public class RubyController : MonoBehaviour
             lookDirection.Normalize();
         }
 
-        currentInput = move;
+        if (move.magnitude > 0)
+        {
+            currentInput = move;
+            slowDownTimer = slowDownSec;
+        }
+        else if (currentInput.magnitude > 0)// slow down
+        {
+            slowDownTimer -= Time.deltaTime;
+            if (slowDownTimer < 0)
+            {
+                slowDownTimer = 0;
+                currentInput = Vector2.zero;
+            }
+        }
 
         // ============== ANIMATION =======================
 

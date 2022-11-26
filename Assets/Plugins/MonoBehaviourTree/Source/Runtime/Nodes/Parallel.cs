@@ -41,13 +41,8 @@ namespace MBT
                         break;
                         //return NodeResult.success;
                     case Status.Failure:
-                        foreach (var ch in children)
-                        {
-                            ch.status = Status.Failure;
-                        }
                         return NodeResult.failure;
                 }
-                //return child.runningNodeResult;
             }
             if (successCount == children.Count)
             {

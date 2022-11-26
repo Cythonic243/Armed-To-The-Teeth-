@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Unity.Profiling;
+using System.Linq;
 
 namespace MBT
 {
@@ -140,11 +141,18 @@ namespace MBT
                     // If node is running, then stop execution or continue children
                     if (currentNode is Parallel)
                     {
-                        children.AddRange(currentNode.children);
+                        var readyChildren = currentNode.children.Where((child) =>
+                        {
+                            return child.status == Status.Ready;
+                        });
+                        children.AddRange(readyChildren);
                     }
                     else if (nodeResult.child != null)
                     {
-                        children.Add(nodeResult.child);
+                        if (nodeResult.child.status == Status.Ready)
+                        {
+                            children.Add(nodeResult.child);
+                        }
                     }
                     
                     if (children.Count == 0) {
@@ -155,7 +163,9 @@ namespace MBT
                             return;
                         }
                         i++;
-                    } else {
+                    }
+                    else
+                    {
                         // remove current
                         executionNodes.RemoveAt(i);
                         for (int j = 0; j < children.Count; j++)
@@ -187,6 +197,29 @@ namespace MBT
                         continue;
                     }
                 } else {
+                    if (currentNode is Parallel && nodeResult.status == Status.Failure)
+                    {
+                        // remove fail children
+                        List<Node> dfs = new List<Node>();
+                        dfs.AddRange(currentNode.children);
+                        while(dfs.Count > 0)
+                        {
+                            var current = dfs[0];
+                            dfs.Remove(current);
+                            current.status = Status.Failure;
+                            dfs.AddRange(current.children);
+                            var executionNodesIndex = executionNodes.IndexOf(current);
+                            if (executionNodesIndex != -1)
+                            {
+                                current.OnExit();
+                                executionNodes.RemoveAt(executionNodesIndex);
+                                if (executionNodesIndex < i)
+                                {
+                                    i--;
+                                }
+                            }
+                        }
+                    }
                     // Remove last node from stack and move up (closer to root)
                     currentNode.OnExit();
                     executionNodes.RemoveAt(i);
@@ -194,6 +227,7 @@ namespace MBT
                     {
                         executionNodes.Insert(i,currentNode.parent);
                     }
+                    i++;
                 }
             }
             
