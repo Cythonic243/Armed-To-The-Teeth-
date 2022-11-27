@@ -15,6 +15,7 @@ public class UIToothCount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        meshPro.text = "Teeth:" + (LevelManager.instance.infectTeeth.Count + LevelManager.instance.vulnerableTeeth.Count);
+        meshPro.text = "Bacteria:" + (LevelManager.instance.enemies.Count);
+        
     }
 }

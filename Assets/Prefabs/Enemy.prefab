@@ -184,7 +184,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300010, guid: 651c4abeb0812e74685da0e5a31c8dff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22c6c791bad16b645acf91b900a03ee8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -232,8 +232,8 @@ BoxCollider2D:
   m_Offset: {x: 0.012663841, y: 0.5149325}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.7069987, y: 1.7053334}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -270,7 +270,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6982084178593964873}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 409982cc78ea2634aaa8c7c41bfa587a, type: 2}
   m_CullingMode: 0
@@ -289,7 +289,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6982084178593964873}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9645ade057726c6428a54cc571053c6d, type: 3}
@@ -511,7 +511,7 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   canMove: 1
-  speed: 8
+  speed: 20
   orientation: 1
   enableRotation: 0
   rotationSpeed: 10
@@ -791,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1989188481354725645
 Transform:
   m_ObjectHideFlags: 0

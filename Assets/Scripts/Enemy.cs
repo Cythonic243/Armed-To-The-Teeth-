@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
 	bool repaired = false;
 	
 	// ===== ANIMATION ========
-	Animator animator;
+	//Animator animator;
 	
 	// ================= SOUNDS =======================
 	AudioSource audioSource;
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
 
 		//direction = horizontal ? Vector2.right : Vector2.down;
 
-		animator = GetComponent<Animator>();
+		//animator = GetComponent<Animator>();
 
 		audioSource = GetComponent<AudioSource>();
 
@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
 
 	public void Fix()
 	{
-		animator.SetTrigger("Fixed");
+		//animator.SetTrigger("Fixed");
 		repaired = true;
 		
 		smokeParticleEffect.SetActive(false);
@@ -125,7 +125,7 @@ public class Enemy : MonoBehaviour
     
     private IEnumerator WaitAndDestory()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 

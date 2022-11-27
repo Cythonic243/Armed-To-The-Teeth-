@@ -227,7 +227,7 @@ namespace MBT
                     {
                         executionNodes.Insert(i,currentNode.parent);
                     }
-                    i++;
+                    // i++;
                 }
             }
             

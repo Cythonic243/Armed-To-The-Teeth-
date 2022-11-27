@@ -16,9 +16,15 @@ public class UISuccess : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LevelManager.instance.infectTeeth.Count + LevelManager.instance.vulnerableTeeth.Count == 0)
+        if (Time.time < 10) return;
+        //if (LevelManager.instance.infectTeeth.Count + LevelManager.instance.vulnerableTeeth.Count == 0)
+        if (LevelManager.instance.enemies.Count == 0)
         {
             meshPro.enabled = true;
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 // Reload
