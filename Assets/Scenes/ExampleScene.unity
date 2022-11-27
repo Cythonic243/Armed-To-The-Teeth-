@@ -171,8 +171,7 @@ MonoBehaviour:
   vulnerableTeeth: []
   enemies: []
   spawnPositionsFromTongue: []
-  infectedTeethSpawnSec: 5
-  tongueSpawnSec: 10
+  enemyCountEvent: {fileID: 11400000, guid: 4da045b8aff22be448ad094f3f9b031e, type: 2}
 --- !u!1 &123851424
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 6982084178593964873, guid: fabc6663cd332f94d9c3b6a1e917070b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6982084178593964875, guid: fabc6663cd332f94d9c3b6a1e917070b,
         type: 3}
@@ -860,7 +859,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337531085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0700004, y: -2.9999998, z: -10}
+  m_LocalPosition: {x: 2.0699995, y: -2.9999998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4188,6 +4187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7535866629d046148a8c5a02cc785cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyCountEvent: {fileID: 11400000, guid: 4da045b8aff22be448ad094f3f9b031e, type: 2}
 --- !u!1 &1796086790
 GameObject:
   m_ObjectHideFlags: 0
@@ -4455,6 +4455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225f780e060b69648a740c804b62ddca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: 309453a478699cc438c621f4708ec0e8, type: 2}
 --- !u!114 &1828537123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9891,7 +9892,7 @@ PrefabInstance:
     - target: {fileID: 6982084178593964873, guid: fabc6663cd332f94d9c3b6a1e917070b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6982084178593964875, guid: fabc6663cd332f94d9c3b6a1e917070b,
         type: 3}
@@ -10048,23 +10049,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1873055267, guid: fabc6663cd332f94d9c3b6a1e917070b, type: 3}
-      propertyPath: speed
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 1873055289, guid: fabc6663cd332f94d9c3b6a1e917070b, type: 3}
       propertyPath: val
       value: 
       objectReference: {fileID: 1417144730}
+    - target: {fileID: 6982084177319890016, guid: fabc6663cd332f94d9c3b6a1e917070b,
+        type: 3}
+      propertyPath: comparator
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6982084178593964873, guid: fabc6663cd332f94d9c3b6a1e917070b,
         type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6982084178593964873, guid: fabc6663cd332f94d9c3b6a1e917070b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6982084178593964875, guid: fabc6663cd332f94d9c3b6a1e917070b,
         type: 3}

@@ -55,8 +55,10 @@ public class Enemy : MonoBehaviour
 
         aILerp = GetComponent<Pathfinding.AILerp>();
 
-        if (LevelManager.instance!=null && !LevelManager.instance.enemies.Contains(this))
-            LevelManager.instance.enemies.Add(this);
+        if (LevelManager.instance != null)
+        {
+            LevelManager.instance.EnemyAdd(this);
+        }
     }
 	
 	void Update()
@@ -131,8 +133,8 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (LevelManager.instance != null && LevelManager.instance.enemies.Contains(this))
-            LevelManager.instance.enemies.Remove(this);
+        if (LevelManager.instance != null)
+            LevelManager.instance.EnemyRemove(this);
     }
 
 }

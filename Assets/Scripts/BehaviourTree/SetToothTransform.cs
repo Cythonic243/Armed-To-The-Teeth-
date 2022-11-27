@@ -16,6 +16,11 @@ namespace ATTT
 
         public override NodeResult Execute()
         {
+            if (variableToSet.Value != null)
+            {
+                return NodeResult.success;
+            }
+
             var teeth = GameObject.FindGameObjectsWithTag("Tooth");
             if (teeth.Length == 0)
             {

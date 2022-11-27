@@ -119,13 +119,14 @@ GameObject:
   - component: {fileID: 2118500888}
   - component: {fileID: 2118500882}
   - component: {fileID: 3140722037435151968}
+  - component: {fileID: 6982084177319890016}
   m_Layer: 30
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6982084178593964875
 Transform:
   m_ObjectHideFlags: 0
@@ -407,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 607500089}
+  selectedEditorNode: {fileID: 6982084177319890016}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -433,6 +434,7 @@ MonoBehaviour:
   parent: {fileID: 7132029997475052407}
   children:
   - {fileID: 2118500885}
+  - {fileID: 6982084177319890016}
   - {fileID: 1873055288}
   - {fileID: 607500089}
   behaviourTree: {fileID: 0}
@@ -511,7 +513,7 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   canMove: 1
-  speed: 20
+  speed: 8
   orientation: 1
   enableRotation: 0
   rotationSpeed: 10
@@ -577,7 +579,7 @@ MonoBehaviour:
   title: Move To GameObject
   rect:
     serializedVersion: 2
-    x: 340
+    x: 380
     y: 240
     width: 160
     height: 45
@@ -675,7 +677,7 @@ MonoBehaviour:
   title: SetToothTransform
   rect:
     serializedVersion: 2
-    x: 100
+    x: 20
     y: 240
     width: 160
     height: 45
@@ -774,6 +776,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: IsDead
   val: 0
+--- !u!114 &6982084177319890016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982084178593964873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0b7cfe3e9cfba47a378c725cf5d0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Distance Condition
+  rect:
+    serializedVersion: 2
+    x: 200
+    y: 240
+    width: 160
+    height: 45
+  parent: {fileID: 3884934095313207119}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  comparator: 0
+  distance:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0.5
+  transform1:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 2275238424012011518}
+    key: goal
+    constantValue: {fileID: 0}
+  transform2:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 2275238424012011518}
+    key: target
+    constantValue: {fileID: 0}
 --- !u!1 &7972057267707664465
 GameObject:
   m_ObjectHideFlags: 0
