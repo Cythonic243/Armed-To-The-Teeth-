@@ -22,6 +22,7 @@ public class Projectile : AttackBase
     //called by the player controller after it instantiate a new projectile to launch it.
     public override void Launch(Vector2 direction, float force)
     {
+        transform.rotation = Quaternion.AngleAxis(Vector2.SignedAngle(direction, Vector2.right), Vector3.back);
         rigidbody2d.AddForce(direction * force);
     }
 

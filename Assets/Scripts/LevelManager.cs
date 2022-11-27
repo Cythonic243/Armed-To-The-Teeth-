@@ -50,9 +50,9 @@ public class LevelManager : MonoBehaviour
         }
         {
             var spawnPositions = GameObject.FindObjectsOfType<SpawnPosition>();
-            spawnPositions.Where((SpawnPosition spawnPosition)=>{
+            spawnPositions = spawnPositions.Where((SpawnPosition spawnPosition)=>{
                 return spawnPosition.GetComponent<Tooth>() == null;
-            });
+            }).ToArray();
             spawnPositionsFromTongue.Clear();
             spawnPositionsFromTongue.AddRange(spawnPositions);
         }
@@ -65,15 +65,20 @@ public class LevelManager : MonoBehaviour
         if (infectedTeethSpawnTimer > infectedTeethSpawnSec)
         {
             infectedTeethSpawnTimer -= infectedTeethSpawnSec;
-            infectTeeth[Random.Range(0, infectTeeth.Count)].GetComponent<SpawnPosition>().Spawn();
+            if (infectTeeth.Count > 0)
+            {
+                infectTeeth[Random.Range(0, infectTeeth.Count)].GetComponent<SpawnPosition>().Spawn();
+            }
         }
 
         tongueSpawnTimer += Time.deltaTime;
         if (tongueSpawnTimer > tongueSpawnSec)
         {
             tongueSpawnTimer -= tongueSpawnSec;
-            spawnPositionsFromTongue[Random.Range(0, spawnPositionsFromTongue.Count)].Spawn();
+            if (spawnPositionsFromTongue.Count > 0)
+            {
+                spawnPositionsFromTongue[Random.Range(0, spawnPositionsFromTongue.Count)].Spawn();
+            }
         }
-        
     }
 }

@@ -41,7 +41,7 @@ public class RubyController : MonoBehaviour
     bool isInvincible;
    
     // ==== ANIMATION =====
-    Animator animator;
+    //Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
     bool isSprint = false;
     
@@ -59,7 +59,7 @@ public class RubyController : MonoBehaviour
         currentHealth = maxHealth;
         
         // ==== ANIMATION =====
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         
         // ==== AUDIO =====
         audioSource = GetComponent<AudioSource>();
@@ -124,9 +124,9 @@ public class RubyController : MonoBehaviour
 
         // ============== ANIMATION =======================
 
-        animator.SetFloat("Look X", lookDirection.x);
-        animator.SetFloat("Look Y", lookDirection.y);
-        animator.SetFloat("Speed", move.magnitude);
+        //animator.SetFloat("Look X", lookDirection.x);
+        //animator.SetFloat("Look Y", lookDirection.y);
+        //animator.SetFloat("Speed", move.magnitude);
 
         // ============== PROJECTILE ======================
         if (Input.GetMouseButtonDown(0) || GetAxisRawDown("Fire1"))
@@ -185,7 +185,7 @@ public class RubyController : MonoBehaviour
             isInvincible = true;
             invincibleTimer = timeInvincible;
             
-            animator.SetTrigger("Hit");
+            //animator.SetTrigger("Hit");
             audioSource.PlayOneShot(hitSound);
 
             Instantiate(hitParticle, transform.position + Vector3.up * 0.5f, Quaternion.identity);
@@ -208,26 +208,26 @@ public class RubyController : MonoBehaviour
     // =============== PROJECTICLE ========================
     void LaunchProjectile()
     {
-        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position /*+ Vector2.up * 0.5f*/, Quaternion.identity);
 
         AttackBase projectile = projectileObject.GetComponent<AttackBase>();
         Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         projectDirection.Normalize();
         projectile.Launch(projectDirection, 300);
         
-        animator.SetTrigger("Launch");
+        //animator.SetTrigger("Launch");
         audioSource.PlayOneShot(shootingSound);
     }
     
     void Repair()
     {
-        animator.SetTrigger("Launch");
+        //animator.SetTrigger("Launch");
         audioSource.PlayOneShot(attackSound);
     }
 
     void MeleeAttack()
     {
-        animator.SetTrigger("Launch");
+        //animator.SetTrigger("Launch");
         audioSource.PlayOneShot(attackSound);
     }
 
