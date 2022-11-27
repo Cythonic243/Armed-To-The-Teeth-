@@ -192,11 +192,14 @@ namespace MBT
                                 _TickMarker.End();
                                 return;
                             }
+#endif
                         }
-                        #endif
+
                         continue;
                     }
-                } else {
+                }
+                else
+                {
                     if (currentNode is Parallel && nodeResult.status == Status.Failure)
                     {
                         // remove fail children
