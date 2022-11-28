@@ -128,11 +128,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 150
-  sprOverheal: {fileID: 21300000, guid: 117feeb76552c1c48a2d3a6ac52e5a1b, type: 3}
-  sprVulnerable: {fileID: 21300000, guid: ad5b035d2df9a9d49abd5830f1eeceba, type: 3}
-  sprInfected: {fileID: 21300000, guid: f6c1e187818eb9a41b45fa8a0e9afec9, type: 3}
+  sprOverheal:
+  - {fileID: 21300000, guid: 63be9c8ecf3663f409635523a80826fd, type: 3}
+  - {fileID: 21300000, guid: 7217c2e6067fc954795d6bc5cbef2bdb, type: 3}
+  - {fileID: 21300000, guid: 1d7154678b79cff4989a6bf42e59fe36, type: 3}
+  - {fileID: 21300000, guid: d85c66979604c104caa15aa42650a47a, type: 3}
+  - {fileID: 21300000, guid: afc88bfd0e564f545981841be9909711, type: 3}
+  - {fileID: 21300000, guid: 22b647fbd4c48ff45a646889b146de9b, type: 3}
+  - {fileID: 21300000, guid: be31a226c569c6a47ae12de501d44e24, type: 3}
+  - {fileID: 21300000, guid: 4bba4fb8108cb2c4abcda1986bf5b045, type: 3}
+  sprVulnerable:
+  - {fileID: 21300000, guid: ad5b035d2df9a9d49abd5830f1eeceba, type: 3}
+  - {fileID: 21300000, guid: 174191330577bdb4ab08e91fa186ee95, type: 3}
+  - {fileID: 21300000, guid: 0dd9eeac71110ce4abc36da0fb8c8a0a, type: 3}
+  - {fileID: 21300000, guid: f0a2d6df79829254fac0b7beec1b42a6, type: 3}
+  - {fileID: 21300000, guid: 42e1f72a47125fd42bf80ca400c80fe1, type: 3}
+  - {fileID: 21300000, guid: 3c353b806cd642440bf8ce17eb72105e, type: 3}
+  - {fileID: 21300000, guid: b19dc1f7554b125438d4d36a0d0611c3, type: 3}
+  - {fileID: 21300000, guid: 3b5e6ae2affeef848b4994a87d8419ff, type: 3}
+  sprInfected:
+  - {fileID: 21300000, guid: f6c1e187818eb9a41b45fa8a0e9afec9, type: 3}
+  - {fileID: 21300000, guid: dcd507d1bbaba8b4597a35a418b595de, type: 3}
+  - {fileID: 21300000, guid: 73828f3c8da73a442a3ac8783840e3bc, type: 3}
+  - {fileID: 21300000, guid: 618bd735466c9f44fbfdf5cb953a8b10, type: 3}
+  - {fileID: 21300000, guid: ef445949abd84d1469845f89920261ef, type: 3}
+  - {fileID: 21300000, guid: b2c6f37ffa84bee4e8fbb4c9de6b0e3e, type: 3}
+  - {fileID: 21300000, guid: 4f08612e39f039a41a44a66f63061b33, type: 3}
+  - {fileID: 21300000, guid: 76dbcfec8849a72448161ed011fc5aed, type: 3}
+  sprHealth:
+  - {fileID: 21300000, guid: 117feeb76552c1c48a2d3a6ac52e5a1b, type: 3}
+  - {fileID: 21300000, guid: 0eb7547c537bd654e8abb24bff4e5782, type: 3}
+  - {fileID: 21300000, guid: 05b3d2d1b29eca449b6c7ed338cac0dd, type: 3}
+  - {fileID: 21300000, guid: 282ab545a09bf7d429a1186d59bc0b67, type: 3}
+  - {fileID: 21300000, guid: 828fadabfedf37b479169d2e3655fc6c, type: 3}
+  - {fileID: 21300000, guid: a46f36ad4ef3d5443a74a19ef4b8b49f, type: 3}
+  - {fileID: 21300000, guid: 83d3da10ffa90544a9b33b834bd392c2, type: 3}
+  - {fileID: 21300000, guid: b5db2706dc7580448ad094787183506d, type: 3}
   state: 1
   textMesh: {fileID: 2591202108173461158}
+  decay: {fileID: 8300000, guid: e7ea517cf3c82a14ba7f2561ac3e44e4, type: 3}
+  repair: {fileID: 8300000, guid: 2ef98096dd78c56489f0861a5b5e3292, type: 3}
 --- !u!114 &5814272191133808194
 MonoBehaviour:
   m_ObjectHideFlags: 0

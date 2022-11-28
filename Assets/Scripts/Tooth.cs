@@ -6,9 +6,11 @@ public class Tooth : MonoBehaviour
 {
     public int health = 100;
     public int maxHealth = 150;
-    public Sprite sprOverheal;
-    public Sprite sprVulnerable;
-    public Sprite sprInfected;
+    public Sprite [] sprOverheal;
+    public Sprite [] sprVulnerable;
+    public Sprite [] sprInfected;
+    public Sprite [] sprHealth;
+    int randIndex;
     SpriteRenderer spriteRenderer;
     SpawnPosition spawnPosition;
     public State state = State.VULNERABLE;
@@ -21,7 +23,7 @@ public class Tooth : MonoBehaviour
     AudioSource audioSource;
     public enum State
     {
-        OVERHEAL, VULNERABLE, INFECTED
+        OVERHEAL, VULNERABLE, INFECTED, HEALTH
     }
 
     // Start is called before the first frame update
@@ -30,12 +32,14 @@ public class Tooth : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPosition = GetComponent<SpawnPosition>();
         audioSource = GetComponent<AudioSource>();
+        randIndex = Random.Range(0, sprHealth.Length);
         EnterState(state);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (state == State.HEALTH || state == State.OVERHEAL) return;
         // update per interval
         enemyTimer += Time.deltaTime;
         if (enemyTimer > enemyInterval)
@@ -51,17 +55,23 @@ public class Tooth : MonoBehaviour
         switch (s)
         {
             case State.OVERHEAL:
-                spriteRenderer.sprite = sprOverheal;
+                spriteRenderer.sprite = sprOverheal[randIndex];
                 spawnPosition.enabled = false;
+                textMesh.gameObject.SetActive(false);
+                break;
+            case State.HEALTH:
+                spriteRenderer.sprite = sprHealth[randIndex];
+                spawnPosition.enabled = false;
+                textMesh.gameObject.SetActive(false);
                 break;
             case State.INFECTED:
-                spriteRenderer.sprite = sprInfected;
+                spriteRenderer.sprite = sprInfected[randIndex];
                 spawnPosition.enabled = true;
                 if (LevelManager.instance != null && !LevelManager.instance.infectTeeth.Contains(this))
                     LevelManager.instance.infectTeeth.Add(this);
                 break;
             case State.VULNERABLE:
-                spriteRenderer.sprite = sprVulnerable;
+                spriteRenderer.sprite = sprVulnerable[randIndex];
                 spawnPosition.enabled = false;
                 if (LevelManager.instance != null && !LevelManager.instance.vulnerableTeeth.Contains(this))
                     LevelManager.instance.vulnerableTeeth.Add(this);
@@ -90,6 +100,9 @@ public class Tooth : MonoBehaviour
     public void ChangeHealth(int n)
     {
         int healthBefore = health;
+
+        if (state == State.HEALTH || state == State.OVERHEAL) return;
+
         if (health + n > 150) n = 150 - health;
         if (health + n < -50) n = - 50 - health;
         health += n;
