@@ -9,14 +9,13 @@ public class startMenuScript : MonoBehaviour
 {
     //[SerializeField] Button StartButton;
     //[SerializeField] Button QuitButton;
-    [SerializeField] private int SceneIndex;
-    // Start is called before the first frame update
+    [SerializeField] private int NextSceneIndex;
 
     public void startButton()
     {
         //Load scene of index 1, may need to change depending on how many scenes there are
-        SceneManager.LoadScene(SceneIndex);
-        Debug.Log("scene loaded: " + SceneIndex);
+        SceneManager.LoadScene(NextSceneIndex);
+        Debug.Log("scene loaded: " + NextSceneIndex);
     }
     public void quitButton()
     {
