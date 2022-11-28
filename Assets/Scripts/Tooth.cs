@@ -16,6 +16,9 @@ public class Tooth : MonoBehaviour
     float enemyTimer = 0;
     float enemyInterval = 1;
     public TMPro.TextMeshProUGUI textMesh;
+    public AudioClip decay;
+    public AudioClip repair;
+    AudioSource audioSource;
     public enum State
     {
         OVERHEAL, VULNERABLE, INFECTED
@@ -26,6 +29,7 @@ public class Tooth : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPosition = GetComponent<SpawnPosition>();
+        audioSource = GetComponent<AudioSource>();
         EnterState(state);
     }
 
@@ -86,9 +90,13 @@ public class Tooth : MonoBehaviour
     public void ChangeHealth(int n)
     {
         int healthBefore = health;
+        if (health + n > 150) n = 150 - health;
+        if (health + n < -50) n = - 50 - health;
         health += n;
-        if (health > 150) health = 150;
-        if (health < -50) health = -50;
+
+        if (n > 0) audioSource.PlayOneShot(repair);
+        if (n < 0) audioSource.PlayOneShot(decay);
+
         if (n < 0 && healthBefore > 0 && health <= 0)
         {
             health = -50;

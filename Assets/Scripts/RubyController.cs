@@ -229,7 +229,7 @@ public class RubyController : MonoBehaviour
         Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         projectDirection.Normalize();
         projectile.Launch(projectDirection, 300);
-        audioSource.PlayOneShot(attackSound);
+        //audioSource.PlayOneShot(attackSound);
     }
 
     void MeleeAttack()
@@ -240,7 +240,7 @@ public class RubyController : MonoBehaviour
         Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         projectDirection.Normalize();
         projectile.Launch(projectDirection, 300);
-        audioSource.PlayOneShot(attackSound);
+        //audioSource.PlayOneShot(attackSound);
     }
 
     void Sprint()
