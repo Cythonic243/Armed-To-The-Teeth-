@@ -50,7 +50,7 @@ public class Tooth : MonoBehaviour
         textMesh.text = health.ToString();
     }
 
-    void EnterState(State s)
+    public void EnterState(State s)
     {
         switch (s)
         {
@@ -67,32 +67,34 @@ public class Tooth : MonoBehaviour
             case State.INFECTED:
                 spriteRenderer.sprite = sprInfected[randIndex];
                 spawnPosition.enabled = true;
-                if (LevelManager.instance != null && !LevelManager.instance.infectTeeth.Contains(this))
-                    LevelManager.instance.infectTeeth.Add(this);
+                if (LevelManager.instance != null)
+                    LevelManager.instance.AddInfectedTooth(this);
+                textMesh.gameObject.SetActive(true);
                 break;
             case State.VULNERABLE:
                 spriteRenderer.sprite = sprVulnerable[randIndex];
                 spawnPosition.enabled = false;
-                if (LevelManager.instance != null && !LevelManager.instance.vulnerableTeeth.Contains(this))
-                    LevelManager.instance.vulnerableTeeth.Add(this);
+                if (LevelManager.instance != null)
+                    LevelManager.instance.AddVulnerableTooth(this);
+                textMesh.gameObject.SetActive(true);
                 break;
         }
         state = s;
     }
 
-    void ExitState(State s)
+    public void ExitState(State s)
     {
         switch (s)
         {
             case State.OVERHEAL:
                 break;
             case State.INFECTED:
-                if (LevelManager.instance != null && LevelManager.instance.infectTeeth.Contains(this))
-                    LevelManager.instance.infectTeeth.Remove(this);
+                if (LevelManager.instance != null)
+                    LevelManager.instance.RemoveInfectedTooth(this);
                 break;
             case State.VULNERABLE:
-                if (LevelManager.instance != null && LevelManager.instance.vulnerableTeeth.Contains(this))
-                    LevelManager.instance.vulnerableTeeth.Remove(this);
+                if (LevelManager.instance != null)
+                    LevelManager.instance.RemoveVulnerableTooth(this);
                 break;
         }
     }

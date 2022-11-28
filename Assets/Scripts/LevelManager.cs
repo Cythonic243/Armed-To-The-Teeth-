@@ -8,9 +8,11 @@ public class LevelManager : MonoBehaviour
     LevelDataScriptObject levelDataScriptableObject;
     public List<Tooth> infectTeeth;
     public List<Tooth> vulnerableTeeth;
+    public List<Tooth> teeth;
     public List<Enemy> enemies;
     public List<SpawnPosition> spawnPositionsFromTongue;
     [SerializeField] public PanettoneGames.GenericEvents.IntEvent enemyCountEvent;
+    [SerializeField] public PanettoneGames.GenericEvents.IntEvent toothCountEvent;
     //public int infectedTeethSpawnSec = 5;
     float infectedTeethSpawnTimer = 0;
     //public int tongueSpawnSec = 10;
@@ -32,7 +34,7 @@ public class LevelManager : MonoBehaviour
             Destroy(this.gameObject);
             yield break;
         }
-
+        yield return new WaitForSeconds(1);
         while (SystemInstance.systemInstance == null)
         {
             Debug.Log("SystemInstance.systemInstance == null waiting");
@@ -47,24 +49,32 @@ public class LevelManager : MonoBehaviour
         }
 
         _instance = this;
+        var teeth = GameObject.FindObjectsOfType<Tooth>();
+        this.teeth = teeth.ToList();
+        teeth = teeth.OrderBy((Tooth tooth) =>
         {
-            var teeth = GameObject.FindObjectsOfType<Tooth>();
-            var results = teeth.Where((Tooth tooth) =>
-            {
-                return tooth.state == Tooth.State.VULNERABLE;
-            });
-            vulnerableTeeth.Clear();
-            vulnerableTeeth.AddRange(results);
-        }
+            return Random.Range(0, 1000000);
+        }).ToArray();
+
+        vulnerableTeeth.Clear();
+        //vulnerableTeeth.AddRange(teeth.Take(levelDataScriptableObject.numTeethVulnerable));
+        foreach(var t in teeth.Take(levelDataScriptableObject.numTeethVulnerable))
         {
-            var teeth = GameObject.FindObjectsOfType<Tooth>();
-            var results = teeth.Where((Tooth tooth) =>
-            {
-                return tooth.state == Tooth.State.INFECTED;
-            });
-            infectTeeth.Clear();
-            infectTeeth.AddRange(results);
+            t.EnterState(Tooth.State.VULNERABLE);
         }
+        infectTeeth.Clear();
+        //infectTeeth.AddRange(teeth.Skip(vulnerableTeeth.Count).Take(levelDataScriptableObject.numTeethInfected));
+        foreach (var t in teeth.Skip(levelDataScriptableObject.numTeethVulnerable).Take(levelDataScriptableObject.numTeethInfected))
+        {
+            t.EnterState(Tooth.State.INFECTED);
+        }
+
+        foreach (var t in teeth.Skip(levelDataScriptableObject.numTeethInfected + levelDataScriptableObject.numTeethVulnerable))
+        {
+            t.EnterState(Tooth.State.HEALTH);
+        }
+        // toothCountEvent.Raise(vulnerableTeeth.Count + infectTeeth.Count);
+
         {
             var enemies_behvaiour = GameObject.FindObjectsOfType<Enemy>();
             enemies.Clear();
@@ -85,7 +95,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    
+    private void OnDisable()
+    {
+        _instance = null;
+    }
 
     // Update is called once per frame
     void Update()
@@ -128,5 +141,33 @@ public class LevelManager : MonoBehaviour
         if (!enemies.Contains(enemy)) return;
         enemies.Remove(enemy);
         enemyCountEvent.Raise(enemies.Count);
+    }
+
+    public void AddVulnerableTooth(Tooth tooth)
+    {
+        if (vulnerableTeeth.Contains(tooth)) return;
+        vulnerableTeeth.Add(tooth);
+        toothCountEvent.Raise(vulnerableTeeth.Count + infectTeeth.Count);
+    }
+
+    public void RemoveVulnerableTooth(Tooth tooth)
+    {
+        if (!vulnerableTeeth.Contains(tooth)) return;
+        vulnerableTeeth.Remove(tooth);
+        toothCountEvent.Raise(vulnerableTeeth.Count + infectTeeth.Count);
+    }
+
+    public void AddInfectedTooth(Tooth tooth)
+    {
+        if (infectTeeth.Contains(tooth)) return;
+        infectTeeth.Add(tooth);
+        toothCountEvent.Raise(vulnerableTeeth.Count + infectTeeth.Count);
+    }
+
+    public void RemoveInfectedTooth(Tooth tooth)
+    {
+        if (!infectTeeth.Contains(tooth)) return;
+        infectTeeth.Remove(tooth);
+        toothCountEvent.Raise(vulnerableTeeth.Count + infectTeeth.Count);
     }
 }

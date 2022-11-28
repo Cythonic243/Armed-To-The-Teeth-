@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class SystemInstance : MonoBehaviour
 {
-    static public SystemInstance systemInstance;
+    static private SystemInstance _systemInstance;
+    static public SystemInstance systemInstance {
+        get
+        {
+            return _systemInstance;
+        }
+    }
     public LevelDataScriptObject levelData;
     // Start is called before the first frame update
     void Start()
     {
-        if (systemInstance != null)
+        if (_systemInstance != null)
         {
             Debug.LogError("systemInstance != null");
             GameObject.Destroy(this.gameObject);
             return;
         }
         DontDestroyOnLoad(this.gameObject);
-        systemInstance = this;
+        _systemInstance = this;
     }
 
     // Update is called once per frame

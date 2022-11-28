@@ -21,28 +21,34 @@ public class UIToothCount : MonoBehaviour
 {
     TextMeshProUGUI meshPro;
     [SerializeField] public PanettoneGames.GenericEvents.IntEvent enemyCountEvent;
+    [SerializeField] public PanettoneGames.GenericEvents.IntEvent toothCountEvent;
     ExtendGenEventListener<int> enemyCountEventListener = new ExtendGenEventListener<int>();
+    ExtendGenEventListener<int> toothCountEventListener = new ExtendGenEventListener<int>();
+    public UISuccess uISuccess;
     // Start is called before the first frame update
     void Start()
     {
         
-
     }
 
     private void OnEnable()
     {
         meshPro = GetComponent<TextMeshProUGUI>();
-        meshPro.text = "Bacteria:--";
-        enemyCountEventListener.action = (i) =>
+        meshPro.text = "Teeth:--";
+        toothCountEventListener.action = (i) =>
         {
-            meshPro.text = "Bacteria:" + (i);
+            meshPro.text = "Teeth:" + (i);
+            if (i == 0)
+            {
+                uISuccess.Success();
+            }
         };
-        enemyCountEvent.RegisterListener(enemyCountEventListener);
+        toothCountEvent.RegisterListener(toothCountEventListener);
     }
 
     private void OnDisable()
     {
-        enemyCountEvent.UnregisterListener(enemyCountEventListener);
+        toothCountEvent.UnregisterListener(toothCountEventListener);
     }
 
     // Update is called once per frame
