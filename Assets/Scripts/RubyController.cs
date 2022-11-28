@@ -19,6 +19,8 @@ public class RubyController : MonoBehaviour
     
     // ======== PROJECTILE ==========
     public GameObject projectilePrefab;
+    public GameObject meleePrefab;
+    public GameObject repairPrefab;
 
     // ======== AUDIO ==========
     public AudioClip hitSound;
@@ -222,12 +224,22 @@ public class RubyController : MonoBehaviour
     void Repair()
     {
         //animator.SetTrigger("Launch");
+        repairPrefab.SetActive(true);
+        AttackBase projectile = repairPrefab.GetComponent<AttackBase>();
+        Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        projectDirection.Normalize();
+        projectile.Launch(projectDirection, 300);
         audioSource.PlayOneShot(attackSound);
     }
 
     void MeleeAttack()
     {
         //animator.SetTrigger("Launch");
+        meleePrefab.SetActive(true);
+        AttackBase projectile = meleePrefab.GetComponent<AttackBase>();
+        Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        projectDirection.Normalize();
+        projectile.Launch(projectDirection, 300);
         audioSource.PlayOneShot(attackSound);
     }
 

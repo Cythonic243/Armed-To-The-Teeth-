@@ -15,6 +15,7 @@ public class Tooth : MonoBehaviour
     List<Enemy> enemiesInRange = new List<Enemy>();
     float enemyTimer = 0;
     float enemyInterval = 1;
+    public TMPro.TextMeshProUGUI textMesh;
     public enum State
     {
         OVERHEAL, VULNERABLE, INFECTED
@@ -38,6 +39,7 @@ public class Tooth : MonoBehaviour
             enemyTimer -= enemyInterval;
             ChangeHealth(-enemiesInRange.Count);
         }
+        textMesh.text = health.ToString();
     }
 
     void EnterState(State s)
