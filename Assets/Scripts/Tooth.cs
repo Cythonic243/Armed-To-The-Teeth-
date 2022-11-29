@@ -21,6 +21,7 @@ public class Tooth : MonoBehaviour
     public AudioClip decay;
     public AudioClip repair;
     AudioSource audioSource;
+    static float audioTimer = 0;
     public enum State
     {
         OVERHEAL, VULNERABLE, INFECTED, HEALTH
@@ -29,6 +30,7 @@ public class Tooth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPosition = GetComponent<SpawnPosition>();
         audioSource = GetComponent<AudioSource>();
@@ -39,6 +41,11 @@ public class Tooth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (audioTimer > 0)
+        {
+            audioTimer -= Time.deltaTime;
+            if (audioTimer < 0) audioTimer = 0;
+        }
         if (state == State.HEALTH || state == State.OVERHEAL) return;
         // update per interval
         enemyTimer += Time.deltaTime;
@@ -109,8 +116,16 @@ public class Tooth : MonoBehaviour
         if (health + n < -50) n = - 50 - health;
         health += n;
 
-        if (n > 0) audioSource.PlayOneShot(repair);
-        if (n < 0) audioSource.PlayOneShot(decay);
+        if (n > 0 && !audioSource.isPlaying && audioTimer <= 0)
+        {
+            audioTimer += repair.length;
+            audioSource.PlayOneShot(repair);
+        }
+        if (n < 0 && !audioSource.isPlaying && audioTimer <= 0)
+        {
+            audioTimer += decay.length;
+            audioSource.PlayOneShot(decay);
+        }
 
         if (n < 0 && healthBefore > 0 && health <= 0)
         {
@@ -139,7 +154,7 @@ public class Tooth : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         Enemy enemy = collision.collider.GetComponent<Enemy>();
         if (enemy != null && enemiesInRange.Contains(enemy))
@@ -147,5 +162,6 @@ public class Tooth : MonoBehaviour
             enemiesInRange.Remove(enemy);
         }
     }
+    
 
 }
