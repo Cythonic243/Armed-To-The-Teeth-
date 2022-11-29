@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/IntroDialogue.unity
     guid: 054e1cb345268e1428b48772d09c77de
+  - enabled: 0
+    path: Assets/Scenes/PostTutorialDialogue.unity
+    guid: c6d2465152d28454d8d9f845a6e8e6d5
+  - enabled: 0
+    path: Assets/Scenes/Patient1 intro.unity
+    guid: 1da51aeafd01aab43b5f44123b1495b4
+  - enabled: 0
+    path: Assets/Scenes/Patient2 intro.unity
+    guid: 0df85b852253ba845b5e900d3a77cc84
+  - enabled: 0
+    path: Assets/Scenes/Patient3 intro.unity
+    guid: ccfad281c30a7fe4395343503fef7f66
   m_configObjects: {}

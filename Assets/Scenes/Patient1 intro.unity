@@ -482,6 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 510112672}
   - component: {fileID: 510112671}
+  - component: {fileID: 510112673}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -510,16 +511,18 @@ MonoBehaviour:
   dialogueText: {fileID: 685655897}
   FadeToBlack: {fileID: 2056607281}
   DentistObject: {fileID: 2132360448}
-  normDentist: {fileID: 21300000, guid: d67e0d875c191404180222163e8d7973, type: 3}
-  clipboardDentist: {fileID: 21300000, guid: f5afea62e0725c54cabc998b08ed587f, type: 3}
+  normDentist: {fileID: 21300000, guid: b38bb46fcb5945046b1def6a4196e639, type: 3}
+  clipboardDentist: {fileID: 21300000, guid: 649265efafd84b44cac69efa2adb5d7c, type: 3}
   ExampleImage: {fileID: 308512713}
   enemy: {fileID: 21300000, guid: 22c6c791bad16b645acf91b900a03ee8, type: 3}
   plaqueEnemy: {fileID: 21300000, guid: c798912ad181bef4e9586f1ae251d55c, type: 3}
   tooth1: {fileID: 21300000, guid: 117feeb76552c1c48a2d3a6ac52e5a1b, type: 3}
   tooth2: {fileID: 21300000, guid: ad5b035d2df9a9d49abd5830f1eeceba, type: 3}
   tooth3: {fileID: 21300000, guid: f6c1e187818eb9a41b45fa8a0e9afec9, type: 3}
-  fading: 0
-  fadeCounter: 0
+  fadingIn: 0
+  fadeInCounter: 0
+  fadingOut: 0
+  fadeOutCounter: 1
   continueButton: {fileID: 1837114741}
   nextSceneButton: {fileID: 1889542157}
   lastText: 0
@@ -539,6 +542,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &510112673
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510112670}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3586e866cac792745963a20f21f7375b, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &623496273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,7 +1291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3553, y: -218.15341}
+  m_AnchoredPosition: {x: -0.3553009, y: -218.15341}
   m_SizeDelta: {x: 692.0267, y: 160.939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556192839
@@ -1579,7 +1678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8462, y: 13.5373}
+  m_AnchoredPosition: {x: 0.84619904, y: 13.5373}
   m_SizeDelta: {x: 1224.404, y: 924.8931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728798644
@@ -2159,7 +2258,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132360448}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2169,8 +2268,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -166.98592, y: 98.39556}
-  m_SizeDelta: {x: 498.0282, y: 472.1591}
+  m_AnchoredPosition: {x: -175, y: 61.6}
+  m_SizeDelta: {x: 450, y: 406.4651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2132360450
 MonoBehaviour:
@@ -2192,7 +2291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d67e0d875c191404180222163e8d7973, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b38bb46fcb5945046b1def6a4196e639, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
