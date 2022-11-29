@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
         while (SystemInstance.systemInstance == null)
         {
             Debug.Log("SystemInstance.systemInstance == null waiting");
-            yield return new WaitForSeconds(1);
+            yield return null;
         }
 
         levelDataScriptableObject = SystemInstance.systemInstance.levelData;

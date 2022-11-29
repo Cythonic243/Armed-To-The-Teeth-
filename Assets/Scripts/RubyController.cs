@@ -51,6 +51,7 @@ public class RubyController : MonoBehaviour
     AudioSource audioSource;
 
     Dictionary<string,bool> axisInUse = new Dictionary<string, bool>();
+    [SerializeField] public PanettoneGames.GenericEvents.IntEvent hpCountEvent;
     void Start()
     {
         // =========== MOVEMENT ==============
@@ -65,6 +66,7 @@ public class RubyController : MonoBehaviour
         
         // ==== AUDIO =====
         audioSource = GetComponent<AudioSource>();
+        hpCountEvent.Raise(currentHealth*20);
     }
 
     void Update()
@@ -198,7 +200,8 @@ public class RubyController : MonoBehaviour
         if(currentHealth == 0)
             Respawn();
         
-        UIHealthBar.Instance.SetValue(currentHealth / (float)maxHealth);
+        //UIHealthBar.Instance.SetValue(currentHealth / (float)maxHealth);
+        hpCountEvent.Raise(currentHealth*20);
     }
     
     void Respawn()
