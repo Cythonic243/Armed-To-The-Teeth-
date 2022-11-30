@@ -246,6 +246,13 @@ public class dialogueManagerScript : MonoBehaviour
     }
     public void NextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (dialogueAssigner == "post-tutorial")
+        {
+            SceneManager.LoadScene("PatientSelectionScreen");
+        }
+        else
+        {
+            SceneManager.LoadScene("ExampleScene");
+        }
     }
 }
