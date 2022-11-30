@@ -6,6 +6,8 @@ public class sceneChanger : MonoBehaviour
 {
     public void MoveToScene(int sceneID)
     {
-        SceneManager.LoadScene(sceneID);
+        SystemInstance.systemInstance.levelIndex = sceneID;
+        Debug.Log("MoveToScene " + sceneID);
+        SceneManager.LoadScene(4+sceneID);
     }
 }

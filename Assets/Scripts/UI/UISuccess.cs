@@ -20,8 +20,15 @@ public class UISuccess : MonoBehaviour
         if (!isSuccess) return;
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            // Reload
-            UnityEngine.SceneManagement.SceneManager.LoadScene("ExampleScene");
+            if (SystemInstance.systemInstance.levelIndex == 0)
+            {
+                // Reload
+                UnityEngine.SceneManagement.SceneManager.LoadScene("PostTutorialDialogue");
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("PatientSelectionScreen");
+            }
         }
     }
 

@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
 
-        levelDataScriptableObject = SystemInstance.systemInstance.levelData;
+        levelDataScriptableObject = SystemInstance.systemInstance.levelData[SystemInstance.systemInstance.levelIndex];
         if (levelDataScriptableObject == null)
         {
             levelDataScriptableObject = ScriptableObject.CreateInstance<LevelDataScriptObject>();

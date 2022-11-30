@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff890096585da4543a749ecb4315f813, type: 3}
-  m_Name: LevelData0001
+  m_Name: LevelData0002
   m_EditorClassIdentifier: 
-  numTeethInfected: 1
-  numTeethVulnerable: 1
-  infectedTeethSpawnSec: 5
-  tongueSpawnSec: 10
+  numTeethInfected: 2
+  numTeethVulnerable: 2
+  infectedTeethSpawnSec: 4
+  tongueSpawnSec: 8

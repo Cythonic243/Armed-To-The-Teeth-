@@ -11,7 +11,8 @@ public class SystemInstance : MonoBehaviour
             return _systemInstance;
         }
     }
-    public LevelDataScriptObject levelData;
+    public LevelDataScriptObject [] levelData;
+    public int levelIndex = 0;
     // Start is called before the first frame update
     void Start()
     {

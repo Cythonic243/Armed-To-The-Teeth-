@@ -63,6 +63,13 @@ public class LevelSelector : MonoBehaviour
             icon.transform.SetParent(parentObject.transform);
             icon.name = "Patient " + i;
             icon.GetComponentInChildren<TextMeshProUGUI>().SetText("Patient " + currentLevelCount);
+            var _sceneChanger = icon.GetComponent<sceneChanger>();
+            var button = icon.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            int levelIdx = currentLevelCount;
+            button.onClick.AddListener(() => {
+                _sceneChanger.MoveToScene(levelIdx);
+            });
         }
     }
     // Update is called once per frame
