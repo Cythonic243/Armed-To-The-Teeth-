@@ -7,6 +7,7 @@ public class UISuccess : MonoBehaviour
 {
     TextMeshProUGUI meshPro;
     bool isSuccess = false;
+    public AudioClip successAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,10 @@ public class UISuccess : MonoBehaviour
 
     public void Success()
     {
+        if (successAudio != null)
+        {
+            GetComponent<AudioSource>().PlayOneShot(successAudio);
+        }
         //if (LevelManager.instance.infectTeeth.Count + LevelManager.instance.vulnerableTeeth.Count == 0)
         // if (LevelManager.instance.enemies.Count == 0)
         {
