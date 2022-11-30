@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
+    path: Assets/Scenes/PatientSelectionScreen.unity
+    guid: 787227fc555246b46ba1d52f53d91d35
+  - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: fb155b67225bd2f45919656b0a1011b8
   - enabled: 0
