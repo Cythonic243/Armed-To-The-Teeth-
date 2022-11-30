@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator WaitAndDestory()
     {
         yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 
     private void OnDestroy()

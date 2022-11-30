@@ -20,15 +20,7 @@ public class UISuccess : MonoBehaviour
         if (!isSuccess) return;
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            if (SystemInstance.systemInstance.levelIndex == 0)
-            {
-                // Reload
-                UnityEngine.SceneManagement.SceneManager.LoadScene("PostTutorialDialogue");
-            }
-            else
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("PatientSelectionScreen");
-            }
+            OnClickSuccess();
         }
     }
 
@@ -42,6 +34,19 @@ public class UISuccess : MonoBehaviour
             {
                 transform.GetChild(i).gameObject.SetActive(true);
             }
+        }
+    }
+
+    public void OnClickSuccess()
+    {
+        if (SystemInstance.systemInstance.levelIndex == 0)
+        {
+            // Reload
+            UnityEngine.SceneManagement.SceneManager.LoadScene("PostTutorialDialogue");
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("PatientSelectionScreen");
         }
     }
 }
