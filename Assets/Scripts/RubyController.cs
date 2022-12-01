@@ -16,6 +16,8 @@ public class RubyController : MonoBehaviour
     public float timeInvincible = 2.0f;
     public Transform respawnPosition;
     public ParticleSystem hitParticle;
+    public int level = 1;
+    int projectileCount = 0;
     
     // ======== PROJECTILE ==========
     public GameObject projectilePrefab;
@@ -136,7 +138,7 @@ public class RubyController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || GetAxisRawDown("Fire1"))
             MeleeAttack();
 
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.C) || GetAxisRawDown("Fire2"))
+        if (Input.GetMouseButtonDown(1)/* || Input.GetKeyDown(KeyCode.C) || GetAxisRawDown("Fire2")*/)
             LaunchProjectile();
 
         if (Input.GetKeyDown(KeyCode.E) || GetAxisRawDown("Fire3"))
@@ -209,19 +211,33 @@ public class RubyController : MonoBehaviour
         ChangeHealth(maxHealth);
         transform.position = respawnPosition.position;
     }
-    
+
     // =============== PROJECTICLE ========================
     void LaunchProjectile()
     {
-        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position /*+ Vector2.up * 0.5f*/, Quaternion.identity);
+        float neg = 1;
+        for (var i = 1; i <= level; i++)
+        {
+            GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position /*+ Vector2.up * 0.5f*/, Quaternion.identity);
+            AttackBase projectile = projectileObject.GetComponent<AttackBase>();
+            Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            projectDirection.Normalize();
+            neg *= -1;
+            if (i > 1)
+                projectDirection = Quaternion.Euler(0, 0, neg * 70.0f / i) * projectDirection;
+            
+            projectile.Launch(projectDirection, 300);
+        }
 
-        AttackBase projectile = projectileObject.GetComponent<AttackBase>();
-        Vector2 projectDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        projectDirection.Normalize();
-        projectile.Launch(projectDirection, 300);
-        
         //animator.SetTrigger("Launch");
         audioSource.PlayOneShot(shootingSound);
+
+        projectileCount++;
+        if (projectileCount > level*level* 100)
+        {
+            level++;
+            projectileCount = 0;
+        }
     }
     
     void Repair()

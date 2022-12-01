@@ -114,7 +114,10 @@ public class LevelManager : MonoBehaviour
             infectedTeethSpawnTimer -= levelDataScriptableObject.infectedTeethSpawnSec;
             if (infectTeeth.Count > 0)
             {
-                infectTeeth[Random.Range(0, infectTeeth.Count)].GetComponent<SpawnPosition>().Spawn();
+                for(var i = 0; i < infectTeeth.Count; i++)
+                {
+                    spawnPositionsFromTongue[Random.Range(0, spawnPositionsFromTongue.Count)].Spawn();
+                }
             }
         }
 
@@ -124,7 +127,10 @@ public class LevelManager : MonoBehaviour
             tongueSpawnTimer -= levelDataScriptableObject.tongueSpawnSec;
             if (spawnPositionsFromTongue.Count > 0)
             {
-                spawnPositionsFromTongue[Random.Range(0, spawnPositionsFromTongue.Count)].Spawn();
+                for (var i = 0; i < spawnPositionsFromTongue.Count; i++)
+                {
+                    spawnPositionsFromTongue[Random.Range(0, spawnPositionsFromTongue.Count)].Spawn();
+                }
             }
         }
     }

@@ -260,8 +260,11 @@ MonoBehaviour:
   smokeParticleEffect: {fileID: 7972057267707664465}
   fixedParticleEffect: {fileID: 2688776450615711917, guid: 96e9cd9955be74842b5d6b2e427ffe16,
     type: 3}
-  hitSound: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
-  fixedSound: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+  hitSound: {fileID: 8300000, guid: ab33497d1f68405499386ccde6fbe134, type: 3}
+  fixedSound: {fileID: 8300000, guid: f5530d2e44b1252408ae7f06ba0e162a, type: 3}
+  sprs:
+  - {fileID: 21300000, guid: 22c6c791bad16b645acf91b900a03ee8, type: 3}
+  - {fileID: 21300000, guid: c798912ad181bef4e9586f1ae251d55c, type: 3}
 --- !u!95 &6982084178593964871
 Animator:
   serializedVersion: 4

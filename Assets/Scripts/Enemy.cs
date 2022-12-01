@@ -34,7 +34,10 @@ public class Enemy : MonoBehaviour
     MBT.MBTExecutor mBTExecutor;
     MBT.MonoBehaviourTree behaviourTree;
     Pathfinding.AILerp aILerp;
-    
+    SpriteRenderer spriteRenderer;
+
+    public Sprite [] sprs;
+
     void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D>();
@@ -54,6 +57,12 @@ public class Enemy : MonoBehaviour
         behaviourTree = GetComponent<MBT.MonoBehaviourTree>();
 
         aILerp = GetComponent<Pathfinding.AILerp>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (sprs.Length > 0)
+        {
+            spriteRenderer.sprite = sprs[UnityEngine.Random.Range(0, sprs.Length)];
+        }
 
         if (LevelManager.instance != null)
         {
